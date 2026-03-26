@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="cs">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Zachodovatel</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div id="app">
+        <aside id="sidebar">
+            <div class="logo">
+                <svg class="logo-icon" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M6 3h12a2 2 0 012 2v4a6 6 0 01-6 6h-4a6 6 0 01-6-6V5a2 2 0 012-2z"/><path d="M12 15v3"/><path d="M8 21h8"/></svg>
+                <span class="logo-text">Zachodovatel</span>
+            </div>
+            <nav>
+                <button class="nav-btn active" data-view="dashboard">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="3" width="7" height="7" rx="1.5"/><rect x="14" y="3" width="7" height="7" rx="1.5"/><rect x="3" y="14" width="7" height="7" rx="1.5"/><rect x="14" y="14" width="7" height="7" rx="1.5"/></svg>
+                    Panel
+                </button>
+                <button class="nav-btn" data-view="stats">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 20V10M12 20V4M6 20v-6"/></svg>
+                    Statistiky
+                </button>
+                <button class="nav-btn" data-view="predictions">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg>
+                    Predikce
+                </button>
+                <button class="nav-btn" data-view="settings">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12.22 2h-.44a2 2 0 00-2 2v.18a2 2 0 01-1 1.73l-.43.25a2 2 0 01-2 0l-.15-.08a2 2 0 00-2.73.73l-.22.38a2 2 0 00.73 2.73l.15.1a2 2 0 011 1.72v.51a2 2 0 01-1 1.74l-.15.09a2 2 0 00-.73 2.73l.22.38a2 2 0 002.73.73l.15-.08a2 2 0 012 0l.43.25a2 2 0 011 1.73V20a2 2 0 002 2h.44a2 2 0 002-2v-.18a2 2 0 011-1.73l.43-.25a2 2 0 012 0l.15.08a2 2 0 002.73-.73l.22-.39a2 2 0 00-.73-2.73l-.15-.08a2 2 0 01-1-1.74v-.5a2 2 0 011-1.74l.15-.09a2 2 0 00.73-2.73l-.22-.38a2 2 0 00-2.73-.73l-.15.08a2 2 0 01-2 0l-.43-.25a2 2 0 01-1-1.73V4a2 2 0 00-2-2z"/><circle cx="12" cy="12" r="3"/></svg>
+                    Nastaven&iacute;
+                </button>
+            </nav>
+            <div class="sidebar-footer">
+                <button id="theme-toggle" class="theme-toggle" title="Prepnout rezim">
+                    <svg class="icon-sun" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="5"/><path d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42"/></svg>
+                    <svg class="icon-moon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 12.79A9 9 0 1111.21 3 7 7 0 0021 12.79z"/></svg>
+                </button>
+                <div class="teacher-info">
+                    <div class="teacher-avatar">TH</div>
+                    <span>Tobias Horvath</span>
+                </div>
+            </div>
+        </aside>
+
+        <main id="main">
+            <header id="header">
+                <div class="header-left">
+                    <button id="menu-toggle" class="menu-toggle">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 12h18M3 6h18M3 18h18"/></svg>
+                    </button>
+                    <h1 id="page-title">Panel</h1>
+                </div>
+                <div class="header-right">
+                    <div class="class-selector">
+                        <select id="class-select"></select>
+                    </div>
+                    <div class="live-badge" id="live-badge">
+                        <span class="pulse"></span>
+                        <span id="active-count">0</span> na zachode
+                    </div>
+                </div>
+            </header>
+
+            <section id="view-dashboard" class="view active">
+                <div class="students-grid" id="students-grid"></div>
+            </section>
+
+            <section id="view-stats" class="view">
+                <div class="stats-container">
+                    <div class="stats-cards">
+                        <div class="stat-card stat-card--purple">
+                            <div class="stat-icon-wrap">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M16 21v-2a4 4 0 00-4-4H6a4 4 0 00-4-4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 00-3-3.87M16 3.13a4 4 0 010 7.75"/></svg>
+                            </div>
+                            <div class="stat-value" id="stat-total">0</div>
+                            <div class="stat-label">Celkem navstev</div>
+                        </div>
+                        <div class="stat-card stat-card--blue">
+                            <div class="stat-icon-wrap">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg>
+                            </div>
+                            <div class="stat-value" id="stat-avg-time">0:00</div>
+                            <div class="stat-label">Prumerny cas</div>
+                        </div>
+                        <div class="stat-card stat-card--green">
+                            <div class="stat-icon-wrap">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg>
+                            </div>
+                            <div class="stat-value" id="stat-today">0</div>
+                            <div class="stat-label">Dnes</div>
+                        </div>
+                        <div class="stat-card stat-card--orange">
+                            <div class="stat-icon-wrap">
+                                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+                            </div>
+                            <div class="stat-value" id="stat-record">0:00</div>
+                            <div class="stat-label">Rekord</div>
+                        </div>
+                    </div>
+                    <div class="stats-panels">
+                        <div class="stats-panel">
+                            <div class="panel-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 20V10M18 20V4M6 20v-4"/></svg><h3>Zebricek navstev</h3></div>
+                            <div id="leaderboard" class="leaderboard"></div>
+                        </div>
+                        <div class="stats-panel">
+                            <div class="panel-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><h3>Prumerny cas</h3></div>
+                            <div id="time-leaderboard" class="leaderboard"></div>
+                        </div>
+                    </div>
+                    <div class="stats-panel full-width">
+                        <div class="panel-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M12 8v4l3 3"/><circle cx="12" cy="12" r="10"/></svg><h3>Historie</h3></div>
+                        <div id="history-list" class="history-list"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="view-predictions" class="view">
+                <div class="predictions-container">
+                    <div class="stats-panel">
+                        <div class="panel-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M22 12h-4l-3 9L9 3l-3 9H2"/></svg><h3>Kdo pujde priste?</h3></div>
+                        <p class="prediction-subtitle">Na zaklade historickych dat</p>
+                        <div id="next-predictions" class="predictions-list"></div>
+                    </div>
+                    <div class="stats-panel">
+                        <div class="panel-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="10"/><path d="M12 6v6l4 2"/></svg><h3>Predpokladany cas</h3></div>
+                        <p class="prediction-subtitle">Prumerna doba pro kazdeho</p>
+                        <div id="time-predictions" class="predictions-list"></div>
+                    </div>
+                    <div class="stats-panel">
+                        <div class="panel-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/></svg><h3>Denni vzorce</h3></div>
+                        <p class="prediction-subtitle">Kdy se chodi nejvic</p>
+                        <div id="hourly-chart" class="hourly-chart"></div>
+                    </div>
+                    <div class="stats-panel">
+                        <div class="panel-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M17 8l-5-5-5 5"/><path d="M12 3v12"/></svg><h3>Denni prognoza</h3></div>
+                        <p class="prediction-subtitle">Kolik navstev dnes ocekavame</p>
+                        <div id="daily-forecast" class="daily-forecast"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="view-settings" class="view">
+                <div class="settings-container">
+                    <div class="settings-section">
+                        <div class="panel-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M2 3h6a4 4 0 014 4v14a3 3 0 00-3-3H2z"/><path d="M22 3h-6a4 4 0 00-4 4v14a3 3 0 013-3h7z"/></svg><h3>Tridy</h3></div>
+                        <div class="add-class-form">
+                            <input type="text" id="new-class-name" placeholder="Nazev tridy (napr. 3.C)">
+                            <button id="add-class-btn" class="btn-primary">Pridat</button>
+                        </div>
+                        <div id="classes-list" class="classes-list"></div>
+                    </div>
+                    <div class="settings-section">
+                        <div class="panel-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M20 21v-2a4 4 0 00-4-4H8a4 4 0 00-4-4v2"/><circle cx="12" cy="7" r="4"/></svg><h3>Zaci &mdash; <span id="settings-class-name"></span></h3></div>
+                        <div class="add-student-form">
+                            <input type="text" id="new-student-name" placeholder="Jmeno zaka">
+                            <button id="add-student-btn" class="btn-primary">Pridat</button>
+                        </div>
+                        <div id="students-list-settings" class="students-list-settings"></div>
+                    </div>
+                    <div class="settings-section">
+                        <div class="panel-header"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M4 7V4a2 2 0 012-2h8.5L20 7.5V20a2 2 0 01-2 2H6a2 2 0 01-2-2v-3"/><polyline points="14 2 14 8 20 8"/></svg><h3>Data</h3></div>
+                        <div class="data-actions">
+                            <button id="export-btn" class="btn-secondary"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M21 15v4a2 2 0 01-2 2H5a2 2 0 01-2-2v-4"/><path d="M7 10l5 5 5-5"/><path d="M12 15V3"/></svg>Exportovat</button>
+                            <button id="clear-history-btn" class="btn-danger"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M3 6h18M8 6V4a2 2 0 012-2h4a2 2 0 012 2v2m3 0v14a2 2 0 01-2 2H7a2 2 0 01-2-2V6h14"/></svg>Smazat historii</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <div id="modal-overlay" class="modal-overlay">
+        <div class="modal" id="modal">
+            <div class="modal-header">
+                <h3 id="modal-title"></h3>
+                <button class="modal-close" id="modal-close"><svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M18 6L6 18M6 6l12 12"/></svg></button>
+            </div>
+            <div class="modal-body" id="modal-body"></div>
+        </div>
+    </div>
+
+    <script src="app.js"></script>
+</body>
+</html>
